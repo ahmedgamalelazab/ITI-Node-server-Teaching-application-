@@ -21,6 +21,9 @@ const {
   //^auth middleware
   app.use(require('./routes/auth.js'));
 
+  //^instructor
+  app.use(require('./routes/instructor.js'));
+
   //^department middleware
   app.use(require('./routes/department.js'));
 
