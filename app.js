@@ -1,4 +1,10 @@
-const { app, bodyParser, runServer, morgan } = require('./database/db.js');
+const {
+  app,
+  bodyParser,
+  runServer,
+  morgan,
+  express,
+} = require('./database/db.js');
 
 (async () => {
   //try to run the server
@@ -7,7 +13,7 @@ const { app, bodyParser, runServer, morgan } = require('./database/db.js');
   app.use(morgan('combined', {}));
 
   //^parsing incoming requests to json
-  app.use(bodyParser.json());
+  app.use(express.json());
 
   //^starting with home route if not found go next
   app.use(require('./routes/home.js'));
@@ -22,12 +28,14 @@ const { app, bodyParser, runServer, morgan } = require('./database/db.js');
   app.use(require('./routes/student.js'));
 
   //*default 404 route if no route specified
-  app.use((req, res) => {
+  app.use((req, res, next) => {
     res.send('404 NOT FOUND');
   });
 
-  //!error middleware
-  app.use((error, req, res) => {
-    console.log(`server error : ${error}`);
+  app.use((error, req, res, next) => {
+    res.status(404).json({
+      success: false,
+      message: error,
+    });
   });
 })();

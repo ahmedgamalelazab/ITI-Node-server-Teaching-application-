@@ -1,4 +1,10 @@
-const { app, bodyParser, morgan, serverPort } = require('../src/server.js');
+const {
+  app,
+  bodyParser,
+  morgan,
+  serverPort,
+  express,
+} = require('../src/server.js');
 
 const mongoose = require('mongoose');
 
@@ -23,4 +29,5 @@ module.exports = {
   bodyParser,
   morgan,
   serverPort,
+  express,
 };

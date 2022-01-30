@@ -9,4 +9,5 @@ module.exports = {
   serverPort,
   morgan,
   bodyParser,
+  express,
 };
